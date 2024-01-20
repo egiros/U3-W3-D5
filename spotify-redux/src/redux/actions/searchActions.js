@@ -14,3 +14,24 @@ export const searchTracks = (query) => (dispatch) => {
       dispatch({ type: "SEARCH_FAIL", payload: error.message });
     });
 };
+
+export const clearSearchResults = () => {
+  console.log("Risultati della ricerca cancellati");
+  return {
+    type: "CLEAR_SEARCH_RESULTS",
+  };
+};
+
+export const selectResult = (result) => {
+  return {
+    type: "SELECT_RESULT",
+    payload: result,
+  };
+};
+
+export const setSelectedTrackId = (trackId) => {
+  return {
+    type: "SET_SELECTED_TRACK_ID",
+    payload: trackId,
+  };
+};

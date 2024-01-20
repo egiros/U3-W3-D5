@@ -27,6 +27,22 @@ export default function searchReducer(state = initialState, action) {
         loading: false,
         error: action.payload,
       };
+    case "CLEAR_SEARCH_RESULTS":
+      console.log("CLEAR_SEARCH_RESULTS action dispatched");
+      return {
+        ...state,
+        results: [],
+      };
+    case "SELECT_RESULT":
+      return {
+        ...state,
+        selectedResult: action.payload,
+      };
+    case "SET_SELECTED_TRACK_ID":
+      return {
+        ...state,
+        selectedTrackId: action.payload,
+      };
     default:
       return state;
   }

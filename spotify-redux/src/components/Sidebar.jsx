@@ -1,7 +1,7 @@
 // components/Sidebar.jsx
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { searchTracks } from "../redux/actions/searchActions";
+import { searchTracks, clearSearchResults } from "../redux/actions/searchActions";
 
 import { Nav, Navbar, Col, Button, Form, FormControl } from "react-bootstrap";
 import logo from "../assets/logo.png";
@@ -16,6 +16,16 @@ const Sidebar = () => {
     e.preventDefault();
     dispatch(searchTracks(query));
   };
+
+  const handleInputChange = (e) => {
+    const newQuery = e.target.value;
+    setQuery(newQuery);
+
+    if (newQuery.trim() === "") {
+      dispatch(clearSearchResults());
+    }
+  };
+
   return (
     <Col xs={2} className="sidebar-fixed p-0 d-none d-lg-block" style={{ width: "250px" }}>
       <Navbar className="flex-column vh-100 d-flex justify-content-between main-nav" bg="black">
@@ -38,7 +48,8 @@ const Sidebar = () => {
                   type="text"
                   placeholder="Search"
                   className="no-rounded-right"
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={handleInputChange}
+                  value={query}
                 />
               </div>
               <Button variant="outline-secondary me-3 no-rounded-left" type="submit">
